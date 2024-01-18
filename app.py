@@ -47,8 +47,8 @@ prompt = st.text_area("Enter your  prompt")
 # Sidebar input for the type of graphs to display
 graph_type = st.multiselect(
     'What are the graphs you want?',
-    ['Piechart', 'Countplot', 'Boxplot'],
-    ['Piechart', 'Boxplot'])
+    ['Piechart', 'Countplot'],
+    ['Piechart'])
 
 # Initialize list to store user-defined options
 list_of_options = []
@@ -58,7 +58,6 @@ new_options = st.text_input('Enter your expected answers (comma-separated)', 'Op
 # Check selected graph types
 isPiechart = 'Piechart' in graph_type
 isCountplot = 'Countplot' in graph_type
-isBoxplot = 'Boxplot' in graph_type
 
 # Button to trigger analysis
 if st.button('Analyze'):
@@ -92,11 +91,6 @@ if st.button('Analyze'):
     if isCountplot:
         st.title('Count Plot - Distribution of Responses')
         fig = px.bar(data_frame['Answers'].explode(), x='Answers', title='Count Plot')
-        st.plotly_chart(fig, use_container_width=True)
-
-    if isBoxplot:
-        st.title('Box Plot - Distribution of Responses')
-        fig = px.box(data_frame['Answers'].explode(), x='Answers', title='Box Plot')
         st.plotly_chart(fig, use_container_width=True)
 
 
